@@ -1,0 +1,2 @@
+# NewsApp
+following clean architecture
