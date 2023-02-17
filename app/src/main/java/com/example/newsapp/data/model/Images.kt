@@ -1,3 +1,5 @@
 package com.example.newsapp.data.model
 
-class Images
+data class Images(
+    val square_140: String
+)

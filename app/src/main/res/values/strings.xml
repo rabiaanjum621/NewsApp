@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NewsApp</string>
+    <!-- Content description of the image -->
+    <string name="image_des">Image</string>
 </resources>

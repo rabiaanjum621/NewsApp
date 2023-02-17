@@ -33,11 +33,9 @@ class NewsViewModel: ViewModel() {
              try {
                  val result = newsService.getNewsList()
              _newsLiveData.postValue(result.body())
-             Log.d("Rabia", "result ${result.body()}")
              } catch (e: Exception) {
-                 e
+                 Log.d("Rabia", "result ${e.message}")
              }
-
          }
      }
 }
