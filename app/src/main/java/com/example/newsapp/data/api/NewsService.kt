@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface NewsService {
 
-    @GET("items")
+    @GET("items?lineupSlug=news")
     suspend fun getNewsList(): Response<List<NewsItem>>
 }
