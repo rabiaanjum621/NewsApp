@@ -10,8 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
+import com.example.newsapp.data.api.NewsService
 import com.example.newsapp.data.model.NewsItem
+import com.example.newsapp.data.repository.NewsRepositoryImpl
+import com.example.newsapp.data.repository.datasourceimpl.NewsRemoteDataSourceImpl
 import com.example.newsapp.databinding.FragmentNewsHomeBinding
+import com.example.newsapp.domain.usecase.NewsUseCase
+import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class NewsHomeFragment : Fragment() {
 
@@ -20,10 +27,21 @@ class NewsHomeFragment : Fragment() {
     private lateinit var adapter: NewsAdapter
     private lateinit var newsList: List<NewsItem>
 
+    fun provideRetrofitInstance() : Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://www.cbc.ca/aggregate_api/v1/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+ val newsService = provideRetrofitInstance().create(NewsService::class.java)
+    val newsRemoteDataSource = NewsRemoteDataSourceImpl(newsService)
+    val newsRepository = NewsRepositoryImpl(newsRemoteDataSource)
+    val newsUseCase = NewsUseCase(newsRepository)
+    val viewModelFactory = NewsViewModelFactory(newsUseCase)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.let {
-            newsViewModel = ViewModelProvider(it)[NewsViewModel::class.java]
+            newsViewModel = ViewModelProvider(it,viewModelFactory)[NewsViewModel::class.java]
         }
     }
 

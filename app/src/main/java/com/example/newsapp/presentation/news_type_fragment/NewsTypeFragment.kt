@@ -15,14 +15,14 @@ import com.example.newsapp.presentation.news_home_fragment.NewsViewModel
 
 class NewsTypeFragment : Fragment() {
 
-    private var newsViewModel: NewsViewModel? = null
+   // private var newsViewModel: NewsViewModel? = null
     private lateinit var binding: FragmentNewsSectionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.let {
-            newsViewModel = ViewModelProvider(it)[NewsViewModel::class.java]
-        }
+//        activity?.let {
+//            newsViewModel = ViewModelProvider(it)[NewsViewModel::class.java]
+//        }
     }
 
     override fun onCreateView(
@@ -36,7 +36,7 @@ class NewsTypeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        newsViewModel?.fetchNewsData()
+     //   newsViewModel?.fetchNewsData()
         initRecycleView()
     }
 
@@ -44,9 +44,9 @@ class NewsTypeFragment : Fragment() {
         val args = arguments?.let { NewsTypeFragmentArgs.fromBundle(it) }
         binding.newsSectionRecyclerView.layoutManager = LinearLayoutManager(activity)
         val adapter = NewsAdapter()
-        if (newsViewModel != null) {
-            adapter.setList(newsViewModel!!.filterNewsData(args?.type))
-        }
+//        if (newsViewModel != null) {
+//            adapter.setList(newsViewModel!!.filterNewsData(args?.type))
+//        }
         binding.newsSectionRecyclerView.adapter = adapter
         binding.newsSectionProgressBar.visibility = View.GONE
     }
