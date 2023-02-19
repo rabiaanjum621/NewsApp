@@ -4,8 +4,9 @@ import com.example.newsapp.data.model.NewsItem
 import com.example.newsapp.data.repository.datasource.NewsRemoteDataSource
 import com.example.newsapp.domain.repository.NewsRepository
 import retrofit2.Response
+import javax.inject.Inject
 
-class NewsRepositoryImpl(
+class NewsRepositoryImpl @Inject constructor(
     private val newsRemoteDataSource: NewsRemoteDataSource
 ): NewsRepository {
     override suspend fun getNewsList(): Response<List<NewsItem>> {
