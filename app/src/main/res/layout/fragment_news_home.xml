@@ -9,16 +9,20 @@
         android:layout_height="match_parent"
         tools:context=".presentation.common.MainActivity">
 
+        <include
+            android:id="@+id/customHomeToolbar"
+            layout="@layout/toolbar" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/newsHomeRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/customHomeToolbar"
             tools:listitem="@layout/layout_card_item" />
 
         <ProgressBar

@@ -1,6 +1,7 @@
 package com.example.newsapp.presentation.news_home_fragment
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,7 @@ import com.example.newsapp.presentation.common.setImageUrl
 import java.util.ArrayList
 
 class NewsAdapter(
+    val isFilterAdapter: Boolean = false,
     private val onItemClick: ((Int) -> Unit)? = null
 ) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>(
 ) {
@@ -53,7 +55,9 @@ class NewsAdapter(
                 tvNewsTitle.text = newsList.title
                 btnNewsType.text = newsList.type
                 tvNewsPublishDate.text = Utils.dateFormatter(newsList.publishedAt)
+                if (isFilterAdapter) btnNewsType.visibility = View.GONE
             }
+
         }
 
     }

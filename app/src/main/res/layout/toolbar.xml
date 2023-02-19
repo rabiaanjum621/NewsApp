@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/materialToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="@dimen/dp18"
+            android:layout_height="@dimen/dp18"
+            android:src="@drawable/logo"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvCBC"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCBC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp20"
+            android:textStyle="bold"
+            android:text="@string/cbc"
+            app:layout_constraintEnd_toStartOf="@id/tvNews"
+            app:layout_constraintStart_toEndOf="@id/ivLogo"
+            app:layout_constraintBottom_toBottomOf="@id/ivLogo"
+            app:layout_constraintTop_toTopOf="@id/ivLogo"
+            tools:text="CBC" />
+
+        <TextView
+            android:id="@+id/tvNews"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/news"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvCBC"
+            app:layout_constraintBottom_toBottomOf="@id/tvCBC"
+            app:layout_constraintTop_toTopOf="@id/tvCBC"
+            tools:text="NEWS" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.appbar.MaterialToolbar>
+</layout>
