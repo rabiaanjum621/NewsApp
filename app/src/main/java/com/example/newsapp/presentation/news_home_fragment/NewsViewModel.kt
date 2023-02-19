@@ -23,7 +23,7 @@ class NewsViewModel(
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val result = newsUseCase.execute()
-                _newsLiveData.postValue(result.body())
+                _newsLiveData.postValue(result)
             } catch (e: Exception) {
                 Log.d("Error", "result ${e.message}")
             }
@@ -32,5 +32,10 @@ class NewsViewModel(
 
     fun filterNewsData(type: String?): List<NewsItem> {
         return (_newsLiveData.value?.filter { it.type == type }) ?: mutableListOf()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        newsUseCase.onClear()
     }
 }

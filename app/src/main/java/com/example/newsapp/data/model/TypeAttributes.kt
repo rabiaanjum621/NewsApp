@@ -1,3 +1,5 @@
 package com.example.newsapp.data.model
 
-class TypeAttributes
+data class TypeAttributes(
+    val url: String
+)

@@ -12,7 +12,9 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsSectionBinding
 import com.example.newsapp.presentation.news_home_fragment.NewsAdapter
 import com.example.newsapp.presentation.news_home_fragment.NewsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewsTypeFragment : Fragment() {
 
    // private var newsViewModel: NewsViewModel? = null

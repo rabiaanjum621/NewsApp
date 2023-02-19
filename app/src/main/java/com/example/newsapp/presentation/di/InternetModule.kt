@@ -11,12 +11,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 @InstallIn(SingletonComponent::class)
 class InternetModule {
-    val BASE_URL = "https://www.cbc.ca/aggregate_api/v1/"
+    private val baseUrl = "https://www.cbc.ca/aggregate_api/v1/"
 
     @Provides
     fun provideRetrofitInstance() : Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

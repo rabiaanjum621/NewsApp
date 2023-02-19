@@ -5,4 +5,5 @@ import retrofit2.Response
 
 interface NewsRemoteDataSource {
     suspend fun getNewsList() : Response<List<NewsItem>>
+    fun onClear()
 }

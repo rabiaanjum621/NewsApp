@@ -13,4 +13,8 @@ class NewsRemoteDataSourceImpl @Inject constructor(
         return newsService.getNewsList()
     }
 
+    override fun onClear() {
+
+    }
+
 }
