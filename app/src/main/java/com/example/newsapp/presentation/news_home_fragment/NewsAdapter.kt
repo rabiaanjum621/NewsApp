@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.R
 import com.example.newsapp.data.model.NewsItem
 import com.example.newsapp.databinding.LayoutCardItemBinding
-import com.example.newsapp.presentation.Utils
-import com.example.newsapp.presentation.setImageUrl
+import com.example.newsapp.presentation.common.Utils
+import com.example.newsapp.presentation.common.setImageUrl
 import java.util.ArrayList
 
 class NewsAdapter(

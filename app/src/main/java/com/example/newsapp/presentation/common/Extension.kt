@@ -1,4 +1,4 @@
-package com.example.newsapp.presentation
+package com.example.newsapp.presentation.common
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
