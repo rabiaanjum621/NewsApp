@@ -1,7 +1,6 @@
 package com.example.newsapp.presentation.common
 
 import android.content.Context
-import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Build
 import android.util.Log
@@ -22,7 +21,7 @@ object Utils {
         }
     }
 
-    fun snackbar(view: View, message: String, color: Int){
+    fun snackBar(view: View, message: String, color: Int){
         Snackbar.make(view, message, Snackbar.LENGTH_LONG)
             .setBackgroundTint(color)
             .show()

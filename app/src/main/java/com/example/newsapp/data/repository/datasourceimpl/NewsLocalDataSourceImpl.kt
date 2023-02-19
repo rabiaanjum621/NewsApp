@@ -2,6 +2,7 @@ package com.example.newsapp.data.repository.datasourceimpl
 
 import com.example.newsapp.data.db.NewsDao
 import com.example.newsapp.data.model.NewsItem
+import com.example.newsapp.data.repository.CustomResponse
 import com.example.newsapp.data.repository.datasource.NewsLocalDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,8 +12,13 @@ import javax.inject.Inject
 class NewsLocalDataSourceImpl @Inject constructor(
     private val newsDao: NewsDao
 ) : NewsLocalDataSource {
-    override suspend fun getNewsFromDB(): List<NewsItem> {
-        return  newsDao.getNewsData()
+    override suspend fun getNewsFromDB(): CustomResponse<List<NewsItem>?> {
+        return try {
+            val data = newsDao.getNewsData()
+            CustomResponse.Success(data)
+        } catch (e: Exception) {
+            CustomResponse.Error("Error while fetching data ${e.message}")
+        }
     }
 
     override suspend fun saveNewsToDB(news: List<NewsItem>) {

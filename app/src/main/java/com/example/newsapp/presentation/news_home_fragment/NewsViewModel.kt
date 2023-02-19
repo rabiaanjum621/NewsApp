@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.model.NewsItem
+import com.example.newsapp.data.repository.CustomResponse
 import com.example.newsapp.domain.usecase.NewsUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,23 +17,20 @@ class NewsViewModel(
     private val newsUseCase: NewsUseCase
 ) : ViewModel() {
 
-    private val _newsLiveData = MutableLiveData<List<NewsItem>>()
-    val newsLiveData: LiveData<List<NewsItem>>
+    private val _newsLiveData = MutableLiveData<CustomResponse<List<NewsItem>?>>()
+    val newsLiveData: LiveData<CustomResponse<List<NewsItem>?>>
         get() = _newsLiveData
 
     fun fetchNewsData() {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
+        _newsLiveData.postValue(CustomResponse.Loading())
+        viewModelScope.launch(Dispatchers.IO) {
                 val result = newsUseCase.execute()
                 _newsLiveData.postValue(result)
-            } catch (e: Exception) {
-                Log.d("Error", "result ${e.message}")
             }
         }
-    }
 
     fun filterNewsData(type: String?): List<NewsItem> {
-        return (_newsLiveData.value?.filter { it.type == type }) ?: mutableListOf()
+        return (_newsLiveData.value?.data?.filter { it.type == type }) ?: mutableListOf()
     }
 
     override fun onCleared() {
