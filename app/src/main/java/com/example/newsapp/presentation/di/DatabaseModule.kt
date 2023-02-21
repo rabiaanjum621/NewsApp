@@ -2,7 +2,6 @@ package com.example.newsapp.presentation.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.newsapp.data.db.NewsDao
 import com.example.newsapp.data.db.NewsDatabase
 import dagger.Module
@@ -23,7 +22,7 @@ class DatabaseModule {
     }
 
     @Provides
-    fun provideNewsDao(database: NewsDatabase) : NewsDao {
+    fun provideNewsDao(database: NewsDatabase): NewsDao {
         return database.newsDao()
     }
 }

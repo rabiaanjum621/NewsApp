@@ -5,9 +5,11 @@ import androidx.room.RoomDatabase
 import com.example.newsapp.data.model.NewsItem
 
 
-@Database(entities = [NewsItem::class],
+@Database(
+    entities = [NewsItem::class],
     version = 1,
-    exportSchema = false)
+    exportSchema = false
+)
 
 
 abstract class NewsDatabase : RoomDatabase() {

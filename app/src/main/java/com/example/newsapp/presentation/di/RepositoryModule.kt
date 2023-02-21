@@ -5,7 +5,6 @@ import com.example.newsapp.data.repository.NewsRepositoryImpl
 import com.example.newsapp.domain.repository.NewsRepository
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
@@ -16,8 +15,8 @@ import dagger.hilt.components.SingletonComponent
 abstract class RepositoryModule {
 
     @Binds
-   abstract fun bindContext(@ApplicationContext context: Context): Context
+    abstract fun bindContext(@ApplicationContext context: Context): Context
 
     @Binds
-    abstract fun bindNewsRepository(newsRepositoryImpl: NewsRepositoryImpl) : NewsRepository
+    abstract fun bindNewsRepository(newsRepositoryImpl: NewsRepositoryImpl): NewsRepository
 }

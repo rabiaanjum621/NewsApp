@@ -8,9 +8,9 @@ import javax.inject.Inject
 
 class NewsRemoteDataSourceImpl @Inject constructor(
     private val newsService: NewsService
-): NewsRemoteDataSource {
-    override suspend fun getNewsList(): Response<List<NewsItem>> {
-        return newsService.getNewsList()
+) : NewsRemoteDataSource {
+    override suspend fun getNewsList(query: String): Response<List<NewsItem>> {
+        return newsService.getNewsList(query)
     }
 
     override fun onClear() {

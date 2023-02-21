@@ -10,7 +10,7 @@ class NewsUseCase @Inject constructor(
     val context: Context,
     private val newsRepository: NewsRepository
 ) {
-    suspend fun execute(): CustomResponse<List<NewsItem>?> = newsRepository.getNewsList(context)
+    suspend fun execute(query: String): CustomResponse<List<NewsItem>?> = newsRepository.getNewsList(context,query)
 
     fun onClear() = newsRepository.onClear()
 }

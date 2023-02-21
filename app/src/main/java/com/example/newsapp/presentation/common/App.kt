@@ -9,7 +9,7 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
-class App: Application() {
+class App : Application() {
 
     @Inject
     lateinit var mConnectionStatusCallback: ConnectionStatusCallback
@@ -27,7 +27,7 @@ class App: Application() {
                 NetworkRequest.Builder().build(),
                 mConnectionStatusCallback
             )
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             Log.e("Error", "Exception in App class ${e.message}")
         }
     }

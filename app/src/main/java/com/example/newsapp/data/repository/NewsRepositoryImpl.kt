@@ -12,14 +12,13 @@ class NewsRepositoryImpl @Inject constructor(
     private val newsLocalDataSource: NewsLocalDataSource,
     private val newsRemoteDataSource: NewsRemoteDataSource
 ): NewsRepository {
-    override suspend fun getNewsList(context: Context): CustomResponse<List<NewsItem>?> {
-      return getNewsDataFromDB(context)
+    override suspend fun getNewsList(context: Context, query: String): CustomResponse<List<NewsItem>?> {
+      return getNewsDataFromDB(context,query)
     }
 
-    // TODO improvements user go offline while APi is running, not getting callback from API
-    private suspend fun getNewsDataFromDB(context: Context) : CustomResponse<List<NewsItem>?> {
+    private suspend fun getNewsDataFromDB(context: Context,query: String) : CustomResponse<List<NewsItem>?> {
           val news: CustomResponse<List<NewsItem>?> = if(Utils.isDeviceOnline(context)) {
-                getNewsDataFromAPI()
+                getNewsDataFromAPI(query)
             } else {
                 newsLocalDataSource.getNewsFromDB()
             }
@@ -32,20 +31,20 @@ class NewsRepositoryImpl @Inject constructor(
 
     }
 
-    private suspend fun getNewsDataFromAPI() : CustomResponse<List<NewsItem>?>{
+    private suspend fun getNewsDataFromAPI(query: String) : CustomResponse<List<NewsItem>?>{
 
         val newsFromAPI: CustomResponse<List<NewsItem>?> = try {
-            val response = newsRemoteDataSource.getNewsList()
+            val response = newsRemoteDataSource.getNewsList(query)
             if (response.isSuccessful) {
                 CustomResponse.Success(response.body())
             } else {
                 CustomResponse.Error(
-                    errorMessage = "Error fetching data from API  message: ${response.errorBody()}",
+                    errorMessage = "Error while fetching data from API  message: ${response.errorBody()}",
                     errorCode = response.code()
                 )
             }
         } catch (e: Exception){
-            CustomResponse.Error("Exception fetching data from API ${e.message}")
+            CustomResponse.Error("Exception while fetching data from API ${e.message}")
 
         }
         return newsFromAPI
