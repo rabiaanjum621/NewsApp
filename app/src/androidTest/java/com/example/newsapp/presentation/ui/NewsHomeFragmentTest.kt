@@ -27,7 +27,7 @@ class NewsHomeFragmentTest {
     }
 
     @Test
-    fun test_isListFragment_visible() {
+    fun test_isListInHomeFrag_visible() {
         onView(withId(R.id.newsHomeRecyclerView)).check(matches(isDisplayed()))
     }
 
@@ -36,11 +36,7 @@ class NewsHomeFragmentTest {
 
         onView(withId(R.id.newsHomeRecyclerView))
             .perform(actionOnItemAtPosition<NewsAdapter.NewsViewHolder>(0, click()))
-//        testDispatcher.scheduler.advanceUntilIdle()
-//        // Confirm nav to DetailFragment and display title
-
-//        onView(withId(R.id.tvNewsTitle)).check(matches(withText(newsTestList.title)))
-    }
+ }
 }
 
 @After

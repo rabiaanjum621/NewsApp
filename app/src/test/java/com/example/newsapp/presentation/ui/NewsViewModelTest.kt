@@ -25,15 +25,14 @@ import org.mockito.MockitoAnnotations
 @OptIn(ExperimentalCoroutinesApi::class)
 class NewsViewModelTest {
 
-
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
-
 
     private val testDispatcher = StandardTestDispatcher()
     private var _testLiveData = MutableLiveData<CustomResponse<List<NewsItem>?>>()
     private val testLiveData
         get() = _testLiveData
+    private val query = "news"
 
     @Mock
     lateinit var newsUseCase: NewsUseCase
@@ -43,7 +42,6 @@ class NewsViewModelTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         Dispatchers.setMain(testDispatcher)
-
     }
 
     @Test
@@ -55,28 +53,28 @@ class NewsViewModelTest {
 
     @Test
     fun testEmptyResponse() = runTest {
-        Mockito.`when`(newsUseCase.execute()).thenReturn(CustomResponse.Success(emptyList()))
+        Mockito.`when`(newsUseCase.execute(query)).thenReturn(CustomResponse.Success(emptyList()))
 
         val response = NewsViewModel(newsUseCase)
-        response.fetchNewsData()
+        response.fetchNewsData(query)
         testDispatcher.scheduler.advanceUntilIdle()
         val result = response.newsLiveData.getOrAwaitValue()
         Assert.assertEquals(0, result.data?.size)
     }
 
     @Test
-    fun testResponseWithDate() = runTest {
+    fun testResponseWithData() = runTest {
         val newsItemList = mutableListOf<NewsItem>(
             NewsItem(12, Images(""),12L, "",""),
             NewsItem(12, Images(""),12L, "",""),
             NewsItem(12, Images(""),12L, "","")
         )
-        Mockito.`when`(newsUseCase.execute()).thenReturn(CustomResponse.Success(newsItemList))
+        Mockito.`when`(newsUseCase.execute(query)).thenReturn(CustomResponse.Success(newsItemList))
 
         val response = NewsViewModel(newsUseCase)
-        response.fetchNewsData()
+        response.fetchNewsData(query)
         testDispatcher.scheduler.advanceUntilIdle()
-        val result: CustomResponse<List<NewsItem>?> = response.newsLiveData.getOrAwaitValue()
+        val result: CustomResponse<List<NewsItem>?> = response.newsLiveData.getOrAwaitValue(2)
         Assert.assertEquals(3, result.data?.size)
     }
 

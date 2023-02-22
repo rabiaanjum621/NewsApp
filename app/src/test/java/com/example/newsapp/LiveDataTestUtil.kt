@@ -10,17 +10,19 @@ import java.util.concurrent.TimeoutException
 
 @VisibleForTesting(otherwise = VisibleForTesting.NONE)
 fun <T> LiveData<T>.getOrAwaitValue(
+    counter: Int = 1,
     time: Long = 2,
     timeUnit: TimeUnit = TimeUnit.SECONDS,
     afterObserve: () -> Unit = {}
 ): T {
     var data: T? = null
-    val latch = CountDownLatch(1)
+    val latch = CountDownLatch(counter)
     val observer = object : Observer<T> {
         override fun onChanged(o: T?) {
             data = o
             latch.countDown()
-            this@getOrAwaitValue.removeObserver(this)
+            if (latch.count == 0L)
+                this@getOrAwaitValue.removeObserver(this)
         }
     }
     this.observeForever(observer)
