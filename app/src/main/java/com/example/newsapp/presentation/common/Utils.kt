@@ -13,11 +13,13 @@ import java.util.*
 
 object Utils {
 
+    private const val TAG = "NewsLogs"
+
     fun dateFormatter(date: Long): String {
         return try {
             return SimpleDateFormat("LLLL dd", Locale.getDefault()).format(date).toString()
         } catch (e: Exception) {
-            Log.e("Error", "Error: ${e.message}")
+            Log.e(TAG, "Error: ${e.message}")
             ""
         }
     }
@@ -34,10 +36,10 @@ object Utils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val networkCapabilities = connManager.getNetworkCapabilities(connManager.activeNetwork)
             return if (networkCapabilities == null) {
-                Log.d("tagLog", "Device offline")
+                Log.d(TAG, "Device offline")
                 false
             } else {
-                Log.d("tagLog", "Device Online")
+                Log.d(TAG, "Device Online")
                 true
             }
         }

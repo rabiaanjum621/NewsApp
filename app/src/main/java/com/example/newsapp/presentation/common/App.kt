@@ -13,6 +13,7 @@ class App : Application() {
 
     @Inject
     lateinit var mConnectionStatusCallback: ConnectionStatusCallback
+    private val TAG = "NewsLogs"
 
     override fun onCreate() {
         super.onCreate()
@@ -28,7 +29,7 @@ class App : Application() {
                 mConnectionStatusCallback
             )
         } catch (e: Exception) {
-            Log.e("Error", "Exception in App class ${e.message}")
+            Log.e(TAG, "Exception in App class ${e.message}")
         }
     }
 }

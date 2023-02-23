@@ -22,14 +22,10 @@ class NewsLocalDataSourceImpl @Inject constructor(
     }
 
     override suspend fun saveNewsToDB(news: List<NewsItem>) {
-        CoroutineScope(Dispatchers.IO).launch {
-            newsDao.saveNewsData(news)
-        }
+        newsDao.saveNewsData(news)
     }
 
     override suspend fun clearAll() {
-        CoroutineScope(Dispatchers.IO).launch {
-            newsDao.deleteAllNewsData()
-        }
+        newsDao.deleteAllNewsData()
     }
 }

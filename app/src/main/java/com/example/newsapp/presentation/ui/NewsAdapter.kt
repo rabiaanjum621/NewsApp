@@ -23,6 +23,7 @@ class NewsAdapter(
     fun setList(news: List<NewsItem>) {
         newsList.clear()
         newsList.addAll(news)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {

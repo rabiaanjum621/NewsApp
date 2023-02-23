@@ -38,7 +38,6 @@ class NewsTypeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        newsViewModel?.fetchNewsData("news")
         initRecycleView()
         setNavigationIconListener()
     }
@@ -58,13 +57,11 @@ class NewsTypeFragment : Fragment() {
     }
 
     private fun setNavigationIconListener() {
-        binding.customTypeToolbar.materialToolbar.apply {
-            setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-            setNavigationOnClickListener {
-                findNavController().navigate(NewsTypeFragmentDirections.actionNewsSectionFragmentToNewsHomeFragment())
+        binding.customTypeToolbar.ivBack.apply {
+            visibility = View.VISIBLE
+            setOnClickListener {
+                activity?.onBackPressedDispatcher?.onBackPressed()
             }
         }
-
-
     }
 }

@@ -23,6 +23,7 @@ class NewsHomeFragment : Fragment() {
 
     @Inject
     lateinit var newsViewModelFactory: NewsViewModelFactory
+    private val query = "news"
 
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var binding: FragmentNewsHomeBinding
@@ -34,6 +35,7 @@ class NewsHomeFragment : Fragment() {
         activity?.let {
             newsViewModel = ViewModelProvider(it, newsViewModelFactory)[NewsViewModel::class.java]
         }
+        newsViewModel.fetchNewsData(query)
     }
 
     override fun onCreateView(
@@ -47,7 +49,6 @@ class NewsHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         EspressoIdlingResource.increment()
-        newsViewModel.fetchNewsData("news")
         initRecycleView()
         observeNewsData()
     }
@@ -94,7 +95,6 @@ class NewsHomeFragment : Fragment() {
 
     private fun displayData(news: List<NewsItem>) {
         adapter.setList(news)
-        adapter.notifyDataSetChanged()
         binding.newsHomeProgressBar.visibility = View.GONE
     }
 

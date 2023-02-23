@@ -29,10 +29,5 @@
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
-        <action
-            android:id="@+id/action_newsSectionFragment_to_newsHomeFragment"
-            app:destination="@id/newsHomeFragment"
-            app:popUpTo="@id/newsHomeFragment"
-            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

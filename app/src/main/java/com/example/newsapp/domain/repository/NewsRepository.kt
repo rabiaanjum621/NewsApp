@@ -5,6 +5,6 @@ import com.example.newsapp.data.model.NewsItem
 import com.example.newsapp.data.repository.CustomResponse
 
 interface NewsRepository {
-    suspend fun getNewsList(context: Context, query: String) : CustomResponse<List<NewsItem>?>
+    suspend fun getNewsList(context: Context, query: String): CustomResponse<List<NewsItem>?>
     fun onClear()
 }

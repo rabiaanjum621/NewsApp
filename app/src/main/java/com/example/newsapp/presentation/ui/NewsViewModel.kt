@@ -22,8 +22,8 @@ class NewsViewModel(
         get() = _newsLiveData
 
     fun fetchNewsData(query: String) {
-        _newsLiveData.postValue(CustomResponse.Loading())
         viewModelScope.launch(Dispatchers.IO) {
+            _newsLiveData.postValue(CustomResponse.Loading())
             val result = newsUseCase.execute(query)
             _newsLiveData.postValue(result)
         }
